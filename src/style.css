@@ -1,0 +1,165 @@
+/* ARCOBALENO — one deliberate sunny look, no dark mode by design.
+   Comments and whitespace are stripped by the build, so keep this readable. */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; }
+body {
+  /* system-ui alone: every browser that ships this game resolves it to the same
+     face the old -apple-system / "Segoe UI" fallbacks named */
+  font: 17px/1.35 system-ui, sans-serif;
+  background: linear-gradient(#aee3ff, #d8f0ff 55%, #eafbe7) fixed;
+  color: #2b3044;
+  user-select: none; -webkit-user-select: none;   /* -webkit- kept: iOS < 16 */
+  touch-action: manipulation;
+  overscroll-behavior: none;
+}
+button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; padding: 0; }
+#app {
+  max-width: 470px; min-height: 100%; margin: 0 auto;
+  padding: 12px 14px calc(16px + env(safe-area-inset-bottom));
+  display: flex; flex-direction: column;
+}
+
+/* everything that sits on a white pill/card shares these two */
+.card, .streak, .iconbtn, .bubble, .game, .tile, .slot.filled, .hint, .rbubble { background: #fff; }
+.btn, .teach, .results, .intro { text-align: center; }
+
+/* ---------- shared bits ---------- */
+.card { border-radius: 20px; padding: 16px; box-shadow: 0 3px 0 rgba(60,70,120,.1); }
+.btn {
+  display: block; width: 100%; padding: 14px; border-radius: 16px;
+  background: #ffb703; color: #5b3a00; font-weight: 700; font-size: 19px;
+  box-shadow: 0 4px 0 #d99a00;
+}
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #d99a00; }
+.muted { color: #7a80a0; font-size: 13px; }
+
+/* ---------- home ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.brand { font-weight: 900; font-size: 24px; letter-spacing: .5px; }
+/* both wordmarks are painted with the seven arc colours, so both are INVISIBLE
+   without a background-image: game.js sets the gradient on each. */
+.brand, .title { -webkit-background-clip: text; background-clip: text; color: transparent; }
+.streak { font-weight: 800; font-size: 17px; border-radius: 999px; padding: 5px 12px; box-shadow: 0 2px 0 rgba(60,70,120,.1); white-space: nowrap; }
+.iconbtn { font-size: 20px; padding: 5px 9px; border-radius: 999px; box-shadow: 0 2px 0 rgba(60,70,120,.1); }
+
+.scene { position: relative; height: 160px; margin: 6px 0 2px; }
+.rb { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%);
+  width: 256px; height: 128px; overflow: hidden; }
+.arc { position: absolute; left: 50%; transform: translateX(-50%);
+  border-radius: 50%; border: 14px solid #e7e9f4; background: none;
+  transition: .6s; }
+.arc.on { filter: drop-shadow(0 0 5px var(--c)); border-color: var(--c); }
+.ground { position: absolute; bottom: 0; left: -14px; right: -14px; height: 34px;
+  background: linear-gradient(#8ed97f, #6cc25e); border-radius: 22px 22px 0 0; }
+.uni { position: absolute; bottom: 12px; left: 16px; font-size: 58px; line-height: 1;
+  transform: scaleX(-1); transition: left 1.2s; z-index: 2;
+  animation: b 2.5s ease-in-out infinite; }
+@keyframes b { 50% { margin-bottom: 7px; } }
+/* The gallop is TWO animations on one element, one per axis: in a single keyframe
+   track both coordinates share one progress curve, which draws a tent. Linear left
+   plus an eased bottom traces a smooth hump over the rainbow. Start values come
+   from .uni above; forwards parks her on the right. */
+.uni.gallop { animation: g 2.5s linear forwards, h 2.5s ease-in-out forwards; }
+@keyframes g { to { left: 82%; } }
+@keyframes h { 50% { bottom: 95px; } }
+.bubble { position: relative; z-index: 3; border-radius: 14px;
+  padding: 8px 12px; font-size: 15px; box-shadow: 0 2px 0 rgba(60,70,120,.1); }
+.bubble.home { margin: 8px 0 2px; }
+.bubble.home:before { content: ""; position: absolute; left: 34px; top: -8px;
+  border: 8px solid transparent; border-bottom-color: #fff; border-top: 0; }
+
+/* two columns, four rows: seven games and the dictionary */
+.games { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.game { position: relative; border-radius: 16px;
+  padding: 8px 4px 7px; text-align: center; box-shadow: 0 3px 0 rgba(60,70,120,.1);
+  border: 3px solid var(--c); }
+.game .lv { position: absolute; top: 5px; right: 6px; font-size: 11px; font-weight: 800;
+  background: var(--c); color: #fff; border-radius: 999px; min-width: 19px; padding: 1px 5px; }
+.game.done .lv { background: #fff; color: var(--c); }
+.game:active, .tile:active { transform: translateY(2px); }
+.game .ic { font-size: 28px; display: block; }
+.game .nm { font-weight: 800; font-size: 17px; display: block; }
+.game .cn { font-size: 12px; font-weight: 700; color: var(--c); display: block; }
+.dz { --c: #7a80a0; }
+.game.done { background: var(--c); }
+.game.done .nm, .game.done .cn { color: #fff; }
+
+/* ---------- round ---------- */
+.mid-wrap { margin: auto 0; padding: 8px 0 70px; }
+.rtop { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.dots { display: flex; gap: 5px; flex: 1; justify-content: center; flex-wrap: wrap; }
+.dot { width: 11px; height: 11px; border-radius: 50%; background: #d9dcee; }
+.dot.ok { background: #45c05e; }
+.dot.no { background: #ef5b6b; }
+.dot.cur { outline: 2px solid #7a80a0; outline-offset: 2px; }
+.combo { font-weight: 800; min-width: 44px; text-align: right; color: #f9844a; }
+
+.prompt { min-height: 128px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px; margin-bottom: 12px; }
+.prompt .big { font-size: 64px; line-height: 1.1; }
+.prompt .word { font-size: 33px; font-weight: 800; }
+.prompt .mid { font-size: 24px; font-weight: 700; }
+.speak { font-size: 21px; background: #eef1ff; border-radius: 999px; padding: 6px 13px; }
+.speak.big { font-size: 42px; padding: 12px 26px; }
+
+.picks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tile { border-radius: 16px; padding: 15px 8px; text-align: center;
+  font-size: 21px; font-weight: 700; box-shadow: 0 4px 0 rgba(60,70,120,.1);
+  border: 3px solid transparent; min-height: 62px; }
+.tile.emojiTile { font-size: 38px; padding: 9px 8px; }
+
+.slots { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center;
+  min-height: 52px; margin-bottom: 13px; }
+.slot { min-width: 54px; height: 46px; border: 2px dashed #b9bedb; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; padding: 0 8px;
+  font-weight: 700; font-size: 19px; background: rgba(255,255,255,.5); }
+.slot.filled { border-style: solid; border-color: #7a80a0; }
+/* MUST come after .slot.filled: same specificity, so order decides whether a
+   graded slot shows its red/green border or stays grey */
+.tile.right, .slot.right { border-color: #45c05e; background: #e9fbee; animation: p .4s; }
+.tile.wrong, .slot.wrong { border-color: #ef5b6b; background: #ffeef0; animation: k .4s; }
+@keyframes p { 40% { transform: scale(1.08); } }
+@keyframes k { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.tray { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; }
+.tray .tile { min-height: 0; padding: 11px 15px; font-size: 19px; }
+.tray .tile.used { opacity: .25; pointer-events: none; }
+
+.hintrow { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
+.hint { font-size: 15px; border-radius: 999px; padding: 7px 13px;
+  box-shadow: 0 2px 0 rgba(60,70,120,.1); }
+.hinttext { font-size: 15px; color: #7a80a0; font-weight: 700; }
+
+.runi { position: fixed; right: 8px; bottom: 8px; font-size: 44px; z-index: 5;
+  transition: transform .3s; pointer-events: none; }
+.runi.happy { transform: translateY(-9px) rotate(-8deg); }
+.rbubble { position: fixed; right: 60px; bottom: 22px; z-index: 5;
+  border-radius: 12px; padding: 6px 11px; font-weight: 700; font-size: 15px;
+  box-shadow: 0 2px 0 rgba(60,70,120,.1); }
+
+/* ---------- teach card / results / intro ---------- */
+.teach { padding: 26px 16px; }
+.teach .big { font-size: 78px; }
+.teach .word { font-size: 36px; font-weight: 800; margin: 6px 0 2px; }
+.fade { animation: f .4s; }
+@keyframes f { from { opacity: 0; transform: translateY(8px); } }
+.spark { position: fixed; z-index: 9; font-size: 26px; pointer-events: none;
+  animation: y .9s ease-out forwards; }
+@keyframes y { to { transform: translate(var(--dx), var(--dy)) scale(.4); opacity: 0; } }
+
+.results { padding-top: 24px; }
+.results .hero { font-size: 74px; }
+.stat { display: flex; justify-content: space-between; padding: 9px 4px;
+  border-bottom: 2px solid #eef0f8; font-weight: 600; }
+.stat b { font-size: 18px; }
+
+.intro { padding-top: 30px; }
+.intro .hero { font-size: 96px; }
+.title { font-size: 34px; font-weight: 900; letter-spacing: 1px; }
+.names { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin: 14px 0; }
+.names .tile { flex: 1 1 30%; font-size: 18px; }
+
+/* the dictionary reuses .tray and .tile; only the tile size differs */
+.tray .dw { width: 30%; padding: 7px 2px; font-size: 29px; }
+
+/* honour the OS 'reduce motion' setting */
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

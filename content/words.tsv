@@ -1,0 +1,488 @@
+italian	emoji	gender	english	category	level
+gatto	🐱		cat	animali	1
+cane	🐶	m	dog	animali	1
+pesce	🐟	m	fish	animali	1
+uccello	🐦		bird	animali	1
+cavallo	🐴		horse	animali	1
+mucca	🐮		cow	animali	1
+maiale	🐷	m	pig	animali	1
+coniglio	🐰		rabbit	animali	1
+topo	🐭		mouse	animali	1
+unicorno	🦄		unicorn	animali	1
+pecora	🐑		sheep	animali	2
+orso	🐻		bear	animali	2
+leone	🦁	m	lion	animali	2
+tigre	🐯	f	tiger	animali	2
+elefante	🐘	m	elephant	animali	2
+scimmia	🐵		monkey	animali	2
+serpente	🐍	m	snake	animali	2
+rana	🐸		frog	animali	2
+ape	🐝	f	bee	animali	2
+farfalla	🦋		butterfly	animali	2
+ragno	🕷️		spider	animali	2
+tartaruga	🐢		turtle	animali	2
+pinguino	🐧		penguin	animali	2
+gallina	🐔		hen	animali	2
+anatra	🦆		duck	animali	2
+lupo	🐺		wolf	animali	2
+volpe	🦊	f	fox	animali	2
+balena	🐳		whale	animali	2
+delfino	🐬		dolphin	animali	2
+drago	🐉		dragon	animali	2
+gufo	🦉		owl	animali	9
+squalo	🦈		shark	animali	9
+polpo	🐙		octopus	animali	9
+granchio	🦀		crab	animali	9
+pipistrello	🦇		bat	animali	9
+cervo	🦌		deer	animali	9
+riccio	🦔		hedgehog	animali	9
+lumaca	🐌		snail	animali	9
+formica	🐜		ant	animali	9
+giraffa	🦒		giraffe	animali	9
+zebra	🦓		zebra	animali	9
+coccodrillo	🐊		crocodile	animali	9
+aquila	🦅		eagle	animali	9
+cammello	🐫		camel	animali	9
+rinoceronte	🦏	m	rhinoceros	animali	9
+ippopotamo	🦛		hippopotamus	animali	9
+pappagallo	🦜		parrot	animali	9
+scoiattolo	🐿️		squirrel	animali	5
+coccinella	🐞		ladybird	animali	5
+lucertola	🦎		lizard	animali	5
+fenicottero	🦩		flamingo	animali	9
+pavone	🦚	m	peacock	animali	9
+cigno	🦢		swan	animali	9
+bradipo	🦥		sloth	animali	9
+scorpione	🦂	m	scorpion	animali	9
+grillo	🦗		cricket	animali	9
+tacchino	🦃		turkey	animali	6
+pane	🍞	m	bread	cibo	1
+formaggio	🧀		cheese	cibo	1
+uovo	🥚		egg	cibo	1
+mela	🍎		apple	cibo	1
+banana	🍌		banana	cibo	1
+arancia	🍊		orange	cibo	1
+pomodoro	🍅		tomato	cibo	1
+pizza	🍕		pizza	cibo	1
+gelato	🍦		ice cream	cibo	1
+torta	🍰		cake	cibo	1
+biscotto	🍪		cookie	cibo	1
+cioccolato	🍫		chocolate	cibo	1
+acqua	💧		water	cibo	1
+caffè	☕	m	coffee	cibo	1
+latte	🥛	m	milk	cibo	1
+vino	🍷		wine	cibo	1
+limone	🍋	m	lemon	cibo	2
+fragola	🍓		strawberry	cibo	2
+uva	🍇		grapes	cibo	2
+anguria	🍉		watermelon	cibo	2
+pesca	🍑		peach	cibo	2
+ananas	🍍	m	pineapple	cibo	2
+carota	🥕		carrot	cibo	2
+patata	🥔		potato	cibo	2
+cipolla	🧅		onion	cibo	2
+fungo	🍄		mushroom	cibo	2
+panino	🥪		sandwich	cibo	2
+carne	🥩	f	meat	cibo	2
+pollo	🍗		chicken	cibo	2
+riso	🍚		rice	cibo	2
+caramella	🍬		candy	cibo	2
+sale	🧂	m	salt	cibo	2
+zuppa	🍲		soup	cibo	2
+insalata	🥗		salad	cibo	2
+tè	🍵	m	tea	cibo	2
+birra	🍺		beer	cibo	2
+succo	🧃		juice	cibo	2
+cornetto	🥐		croissant	cibo	2
+colazione	🥣	f	breakfast	cibo	2
+pranzo	🍝		lunch	cibo	2
+cena	🥘		dinner	cibo	2
+miele	🍯	m	honey	cibo	3
+burro	🧈		butter	cibo	3
+oliva	🍸		olive	cibo	3
+peperoncino	🌶️		chili pepper	cibo	3
+pasta	🍝		pasta	cibo	4
+pera	🍐		pear	cibo	4
+ciliegia	🍒		cherry	cibo	4
+melanzana	🍆		aubergine	cibo	5
+aglio	🧄		garlic	cibo	5
+zucca	🎃		pumpkin	cibo	6
+melone	🍈	m	melon	cibo	4
+verdura	🥬		vegetables	cibo	5
+cetriolo	🥒		cucumber	cibo	5
+patatine	🍟	fp	chips, fries	cibo	6
+ciambella	🍩		doughnut	cibo	6
+mais	🌽		sweetcorn	cibo	6
+casa	🏠		house	casa	1
+porta	🚪		door	casa	1
+letto	🛏️		bed	casa	1
+sedia	🪑		chair	casa	1
+tavolo	🍽️		table	casa	1
+bagno	🛁		bathroom	casa	1
+telefono	☎️		telephone	casa	1
+televisione	📺	f	television	casa	1
+computer	💻	m	computer	casa	1
+libro	📕		book	casa	1
+penna	🖊️		pen	casa	1
+matita	✏️		pencil	casa	1
+finestra	🖼️		window	casa	1
+regalo	🎁		gift	casa	1
+soldi	💰	mp	money	casa	1
+foto	📷	f	photo	casa	1
+chiave	🔑	f	key	casa	2
+divano	🛋️		sofa	casa	2
+doccia	🚿		shower	casa	2
+specchio	🤳		mirror	casa	2
+lampada	💡		lamp	casa	2
+orologio	⌚		clock	casa	2
+forbici	✂️	fp	scissors	casa	2
+cucina	🍳		kitchen	casa	2
+giardino	🌼		garden	casa	2
+lettera	✉️		letter	casa	2
+giornale	📰	m	newspaper	casa	2
+radio	📻	f	radio	casa	2
+ombrello	☂️		umbrella	casa	2
+candela	🕯️		candle	casa	9
+frigorifero	🧊		refrigerator	casa	3
+sapone	🧼	m	soap	casa	3
+spazzolino	🦷		toothbrush	casa	3
+scopa	🧹		broom	casa	3
+secchio	🧺		bucket	casa	3
+campana	🔔		bell	casa	9
+pacco	📦		package	casa	3
+batteria	🔋		battery	casa	3
+posta	📮		post, mail	casa	6
+uomo	👨		man	persone	1
+donna	👩		woman	persone	1
+bambino	👶		child	persone	1
+ragazzo	👦		boy	persone	1
+ragazza	👧		girl	persone	1
+famiglia	👪		family	persone	1
+madre	🤱	f	mother	persone	1
+padre	🧔	m	father	persone	1
+mamma	👩		mom	persone	1
+papà	👨	m	dad	persone	1
+fratello	👬		brother	persone	1
+sorella	👭		sister	persone	1
+nonno	👴		grandfather	persone	1
+nonna	👵		grandmother	persone	1
+amico	🤝		friend	persone	1
+figlio	🧒		son	persone	2
+figlia	👧		daughter	persone	2
+zio	🧔		uncle	persone	2
+zia	👩		aunt	persone	2
+re	🤴	m	king	persone	2
+regina	👸		queen	persone	2
+principessa	👸		princess	persone	2
+mago	🧙		wizard	persone	2
+fantasma	👻	m	ghost	persone	2
+robot	🤖	m	robot	persone	2
+poliziotto	👮		police officer	persone	2
+dottore	🩺	m	doctor	persone	2
+maestro	🏫		teacher	persone	2
+principe	🤴	m	prince	persone	9
+pagliaccio	🤡		clown	persone	9
+alieno	👽		alien	persone	9
+vampiro	🧛		vampire	persone	9
+sirena	🧜		mermaid	persone	9
+cuoco	🍳		cook	persone	3
+sposa	👰		bride	persone	9
+fata	🧚		fairy	persone	9
+marito	🤵		husband	persone	4
+moglie	👰	f	wife	persone	4
+occhio	👁️		eye	corpo	1
+bocca	👄		mouth	corpo	1
+naso	👃		nose	corpo	1
+orecchio	👂		ear	corpo	1
+mano	✋	f	hand	corpo	1
+piede	🦶	m	foot	corpo	1
+gamba	🦵		leg	corpo	1
+braccio	💪		arm	corpo	1
+cuore	❤️	m	heart	corpo	1
+testa	👤		head	corpo	1
+dente	🦷	m	tooth	corpo	2
+lingua	👅		tongue; language	corpo	2
+cervello	🧠		brain	corpo	2
+capelli	💇	mp	hair	corpo	2
+faccia	😊		face	corpo	2
+osso	🦴		bone	corpo	3
+sangue	🩸	m	blood	corpo	3
+sole	☀️	m	sun	natura	1
+luna	🌙		moon	natura	1
+stella	⭐		star	natura	1
+nuvola	☁️		cloud	natura	1
+pioggia	🌧️		rain	natura	1
+neve	❄️	f	snow	natura	1
+fuoco	🔥		fire	natura	1
+mondo	🌍		world	natura	1
+mare	🌊	m	sea	natura	1
+montagna	⛰️		mountain	natura	1
+albero	🌳		tree	natura	1
+fiore	🌸	m	flower	natura	1
+arcobaleno	🌈		rainbow	natura	1
+cielo	🌤️		sky	natura	1
+vento	🌬️		wind	natura	2
+foglia	🍃		leaf	natura	2
+rosa	🌹		rose	natura	2
+fulmine	⚡	m	lightning	natura	2
+isola	🏝️		island	natura	2
+spiaggia	🏖️		beach	natura	2
+terra	🌎		earth	natura	2
+fiume	🏞️	m	river	natura	2
+lago	🛶		lake	natura	2
+bosco	🌲		forest	natura	2
+pianta	🌱		plant	natura	2
+ghiaccio	🧊		ice	natura	2
+girasole	🌻	m	sunflower	natura	9
+deserto	🏜️		desert	natura	9
+vulcano	🌋		volcano	natura	9
+pietra	🗿		stone	natura	3
+conchiglia	🐚		seashell	natura	9
+cactus	🌵	m	cactus	natura	9
+temporale	⛈️	m	thunderstorm	natura	5
+nebbia	🌫️		fog	natura	6
+giorno	🌞		day	tempo	1
+notte	🌃	f	night	tempo	1
+mattina	🌅		morning	tempo	1
+sera	🌆		evening	tempo	1
+settimana	📅		week	tempo	1
+mese	📅	m	month	tempo	1
+anno	📅		year	tempo	1
+ora	⏰		hour	tempo	1
+compleanno	🎂		birthday	tempo	1
+festa	🎉		party	tempo	1
+minuto	⏰		minute	tempo	2
+lunedì	📅1️⃣	m	Monday	tempo	2
+martedì	📅2️⃣	m	Tuesday	tempo	2
+mercoledì	📅3️⃣	m	Wednesday	tempo	2
+giovedì	📅4️⃣	m	Thursday	tempo	2
+venerdì	📅5️⃣	m	Friday	tempo	2
+sabato	📅6️⃣		Saturday	tempo	2
+domenica	📅7️⃣		Sunday	tempo	2
+primavera	🌷		spring	tempo	2
+estate	⛱️	f	summer	tempo	2
+autunno	🍂		autumn	tempo	2
+inverno	⛄		winter	tempo	2
+Natale	🎄	m	Christmas	tempo	2
+rosso	🔴		red	colori	1
+giallo	🟡		yellow	colori	1
+verde	🟢		green	colori	1
+azzurro	🔵		light blue	colori	1
+blu	🔵		dark blue	colori	1
+viola	🟣	inv	purple	colori	1
+nero	⚫		black	colori	1
+bianco	⚪		white	colori	1
+colore	🖌️	m	color	colori	1
+arancione	🟠		orange (color)	colori	2
+rosa	🎀	inv	pink	colori	2
+marrone	🟤		brown	colori	2
+grigio	🌫️		gray	colori	2
+vestito	👗		dress	vestiti	1
+camicia	👕		shirt	vestiti	1
+pantaloni	👖	mp	pants	vestiti	1
+scarpa	👟		shoe	vestiti	1
+cappello	🎩		hat	vestiti	1
+zaino	🎒		backpack	vestiti	1
+calzino	🧦		sock	vestiti	2
+guanto	🧤		glove	vestiti	2
+sciarpa	🧣		scarf	vestiti	2
+cappotto	🧥		coat	vestiti	2
+occhiali	👓	mp	glasses	vestiti	2
+anello	💍		ring	vestiti	2
+borsa	👜		bag	vestiti	2
+corona	👑		crown	vestiti	2
+pigiama	🛌	m	pajamas	vestiti	3
+cravatta	👔		tie	vestiti	4
+scuola	🏫		school	luoghi	1
+negozio	🏪		shop	luoghi	1
+ristorante	🍽️	m	restaurant	luoghi	1
+strada	🛣️		street	luoghi	1
+città	🏙️	f	city	luoghi	1
+parco	🏞️		park	luoghi	1
+ospedale	🏥	m	hospital	luoghi	2
+banca	🏦		bank	luoghi	2
+chiesa	⛪		church	luoghi	2
+castello	🏰		castle	luoghi	2
+albergo	🏨		hotel	luoghi	2
+ponte	🌉	m	bridge	luoghi	2
+stazione	🚉	f	station	luoghi	2
+piazza	⛲		square	luoghi	2
+paese	🏘️	m	town; country	luoghi	2
+mercato	🛒		market	luoghi	2
+aeroporto	🛬		airport	luoghi	2
+fabbrica	🏭		factory	luoghi	3
+torre	🗼	f	tower	luoghi	9
+tenda	⛺		tent	luoghi	9
+circo	🎪		circus	luoghi	9
+biblioteca	🏛️		library	luoghi	3
+ufficio	🏢		office	luoghi	4
+stadio	🏟️		stadium	luoghi	4
+farmacia	💊		pharmacy	luoghi	5
+palestra	🏋️		gym	luoghi	4
+macchina	🚗		car	trasporti	1
+autobus	🚌	m	bus	trasporti	1
+treno	🚂		train	trasporti	1
+aereo	✈️		airplane	trasporti	1
+bicicletta	🚲		bicycle	trasporti	1
+nave	🚢	f	ship	trasporti	2
+barca	⛵		boat	trasporti	2
+moto	🏍️	f	motorcycle	trasporti	2
+camion	🚚	m	truck	trasporti	2
+razzo	🚀		rocket	trasporti	2
+taxi	🚕	m	taxi	trasporti	2
+elicottero	🚁		helicopter	trasporti	3
+metropolitana	🚇		subway	trasporti	3
+ambulanza	🚑		ambulance	trasporti	3
+semaforo	🚦		traffic light	trasporti	3
+benzina	⛽		gasoline	trasporti	3
+trattore	🚜	m	tractor	trasporti	4
+chitarra	🎸		guitar	oggetti	1
+palla	🏐		ball	oggetti	1
+coltello	🔪		knife	oggetti	2
+martello	🔨		hammer	oggetti	2
+spada	🗡️		sword	oggetti	2
+pianoforte	🎹	m	piano	oggetti	2
+tamburo	🥁		drum	oggetti	2
+violino	🎻		violin	oggetti	2
+microfono	🎤		microphone	oggetti	2
+forchetta	🍴		fork	oggetti	2
+cucchiaio	🥄		spoon	oggetti	2
+piatto	🍛		plate	oggetti	2
+bicchiere	🥃	m	drinking glass	oggetti	2
+bottiglia	🍾		bottle	oggetti	2
+tazza	☕		cup	oggetti	2
+bandiera	🚩		flag	oggetti	2
+mappa	🗺️		map	oggetti	2
+diamante	💎	m	diamond	oggetti	2
+giocattolo	🧸		toy	oggetti	2
+dado	🎲		die (dice)	oggetti	2
+palloncino	🎈		balloon	oggetti	2
+trofeo	🏆		trophy	oggetti	2
+carta	📄		paper	oggetti	2
+tromba	🎺		trumpet	oggetti	9
+scudo	🛡️		shield	oggetti	9
+bomba	💣		bomb	oggetti	9
+bussola	🧭		compass	oggetti	9
+telescopio	🔭		telescope	oggetti	9
+microscopio	🔬		microscope	oggetti	9
+magnete	🧲	m	magnet	oggetti	9
+scacchi	♟️	mp	chess	oggetti	9
+aquilone	🪁	m	kite	oggetti	9
+moneta	💰		coin	oggetti	3
+medaglia	🥇		medal	oggetti	9
+scontrino	🧾		receipt	oggetti	5
+musica	🎵		music	svago	1
+canzone	🎶	f	song	svago	1
+film	🎬	m	movie	svago	1
+gioco	🎮		game	svago	1
+calcio	⚽		soccer	svago	1
+basket	🏀	m	basketball	svago	2
+tennis	🎾	m	tennis	svago	2
+nuoto	🏊		swimming	svago	2
+corsa	🏃		running	svago	2
+ballerina	💃		dancer	svago	2
+teatro	🎭		theater	svago	2
+arte	🎨	f	art	svago	2
+valigia	🧳		suitcase	svago	2
+viaggio	🛤️		trip	svago	2
+biglietto	🎟️		ticket	svago	2
+sci	⛷️	m	skiing	svago	9
+sonno	💤		sleep	svago	3
+vacanza	🏖️		holiday	svago	5
+amore	💕	m	love	astratte	1
+lavoro	👷		work	astratte	1
+nome	📛	m	name	astratte	1
+cosa	📦		thing	astratte	1
+tempo	⌛		time; weather	astratte	1
+vita	💓		life	astratte	1
+parola	💬		word	astratte	1
+numero	🔢		number	astratte	1
+domanda	❓		question	astratte	2
+risposta	✅		answer	astratte	2
+idea	💭		idea	astratte	2
+problema	⚠️	m	problem	astratte	2
+paura	😱		fear	astratte	2
+storia	📜		story; history	astratte	2
+aiuto	🆘		help	astratte	2
+fame	🤤	f	hunger	astratte	2
+sete	🥤	f	thirst	astratte	2
+verità	⚖️	f	truth	astratte	3
+bugia	🤞		lie	astratte	3
+pace	☮️	f	peace	astratte	3
+guerra	⚔️		war	astratte	3
+scherzo	🃏		joke	astratte	3
+rabbia	😡		anger	astratte	6
+prezzo	🏷️		price	astratte	4
+spesa	🛒		grocery shopping	astratte	6
+medicina	💊		medicine	astratte	6
+sogno	💭		dream	astratte	6
+grande			big	agg	1
+piccolo			small	agg	1
+bello			beautiful	agg	1
+brutto			ugly	agg	1
+buono			good	agg	9
+cattivo			bad	agg	9
+nuovo			new	agg	9
+vecchio			old	agg	1
+alto			tall	agg	9
+basso			short	agg	9
+caldo			hot	agg	9
+freddo			cold	agg	9
+veloce			fast	agg	1
+forte			strong	agg	1
+felice			happy	agg	1
+triste			sad	agg	1
+facile			easy	agg	9
+difficile			difficult	agg	9
+dolce			sweet	agg	9
+primo			first	agg	9
+altro			other	agg	9
+importante			important	agg	9
+interessante			interesting	agg	9
+divertente			fun	agg	9
+vero			true	agg	9
+stanco			tired	agg	1
+pronto			ready	agg	1
+giovane			young	agg	2
+lungo			long	agg	9
+corto			short (length)	agg	9
+lento			slow	agg	2
+debole			weak	agg	2
+ricco			rich	agg	2
+povero			poor	agg	2
+pieno			full	agg	9
+vuoto			empty	agg	9
+ultimo			last	agg	9
+stesso			same	agg	9
+aperto			open	agg	9
+chiuso			closed	agg	9
+pulito			clean	agg	9
+sporco			dirty	agg	9
+leggero			light (weight)	agg	9
+pesante			heavy	agg	9
+simpatico			likeable	agg	2
+noioso			boring	agg	9
+strano			strange	agg	2
+sicuro			sure; safe	agg	9
+falso			false	agg	9
+gentile			kind	agg	2
+libero			free	agg	2
+occupato			busy	agg	2
+famoso			famous	agg	2
+magico			magical	agg	2
+caro			expensive; dear	agg	9
+delizioso			delicious	agg	9
+amaro			bitter	agg	9
+salato			salty	agg	9
+largo			wide	agg	9
+stretto			narrow	agg	9
+antipatico			unpleasant	agg	9
+fortunato			lucky	agg	3
+pericoloso			dangerous	agg	9
+silenzioso			quiet	agg	9
+morbido			soft	agg	9
+duro			hard	agg	9
+bagnato			wet	agg	9
+asciutto			dry	agg	9
+economico			cheap	agg	9
+piccante			spicy	agg	9
