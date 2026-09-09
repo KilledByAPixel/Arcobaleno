@@ -257,7 +257,12 @@ function wrongWords(right, n, hard) {
 }
 // Round to TWO SIGNIFICANT FIGURES: 456789 -> 450000. Caps any number at two non-zero
 // digits, which is what keeps a spelled-out Italian number short enough to read.
-const sig2 = n => n - n % 10 ** Math.max(0, ('' + n).length - 2);
+const sig = (n, d = 2) => n - n % 10 ** Math.max(0, ('' + n).length - d);
+// Soft hyphens (U+00AD) at the morpheme joins of a spelled-out number: invisible
+// until the line has to break, and then they break as a real dash instead of
+// mid-syllable. DISPLAY ONLY -- never feed this to speech or to an answer
+// comparison, both of which want the plain string.
+const hy = s => s.replace(/cento|mil/g, '­$&');
 // step: how far apart the near-miss distractors sit, so they do not spell almost
 // identically. The caller passes the prompt's own magnitude.
 function wrongNums(n, lo, hi, step = 1) {
@@ -274,7 +279,7 @@ function wrongNums(n, lo, hi, step = 1) {
     // sig2 the filler too, or it undoes the caller's rounding and drops a 456789 next
     // to three tidy choices. Its own magnitude, not `step`: when the prompt is 0 the
     // step is 1 and would round nothing at all.
-    const t = sig2(lo + (Math.random() * (hi - lo + 1) | 0));
+    const t = sig(lo + (Math.random() * (hi - lo + 1) | 0));
     if (!s.has(t)) { s.add(t); out.push(t); }
   }
   return out;

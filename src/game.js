@@ -167,11 +167,15 @@ function numParts(n) {
 function genNumeri(lvl, forceN) {
   const [lo, hi] = N_RANGE[Math.min(lvl, 6) - 1];
   let n = forceN != null ? forceN : lo + (Math.random() * (hi - lo + 1) | 0);
-  const asmOk = m => m >= 20 && !/[138]/.test('' + m) && m % 100 != 0;
+  const asmOk = m => m >= 20 && !/[138]/.test('' + m);
   if (forceN == null && lvl >= 3 && Math.random() < .4) {   // assemble mode
     let guard = 50;
     while (!asmOk(n) && guard--) n = lo + (Math.random() * (hi - lo + 1) | 0);
     if (asmOk(n)) {
+      // three significant figures at most: 744065 was five non-zero digits, a long tile
+      // run and a 43-letter answer. Rounding also replaces the old "not a round hundred"
+      // rule, which existed to stop two-tile giveaways.
+      n = sig(n, 3);
       const parts = numParts(n);
       const extra = shuffle([...NT.slice(2), 'cento', ...NU.slice(2, 10)].filter(x => x && !parts.includes(x))).slice(0, 2);
       return {
@@ -200,17 +204,17 @@ function genNumeri(lvl, forceN) {
     // Assemble mode still draws the full unrounded range: a complex number belongs
     // there, where it is built from parts rather than read off a tile.
     const step = 10 ** Math.max(0, ('' + n).length - 2);
-    n = sig2(n);
+    n = sig(n);
     wrong = wrongNums(n, lo, hi, step);
   }
   if (Math.random() < .5)
     return {                                        // numeral -> word
       mode: 0, word: fmtN(n), sub: 'tocca il numero giusto', item: 'n' + nBand(n),
-      choices: shuffle([{ t: num(n), ok: 1 }, ...wrong.map(x => ({ t: num(x) }))]),
+      choices: shuffle([{ t: hy(num(n)), ok: 1 }, ...wrong.map(x => ({ t: hy(num(x)) }))]),
       okSay: num(n)
     };
   return {                                          // word -> numeral
-    mode: 0, mid: num(n), sub: 'tocca la cifra giusta', item: 'n' + nBand(n),
+    mode: 0, mid: hy(num(n)), sub: 'tocca la cifra giusta', item: 'n' + nBand(n),
     choices: shuffle([{ t: fmtN(n), ok: 1 }, ...wrong.map(x => ({ t: fmtN(x) }))]),
     okSay: num(n)
   };
