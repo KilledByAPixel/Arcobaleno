@@ -365,11 +365,13 @@ function renderQ() {
     <div class=hintrow>
       ${q.hint ? `<button class=hint id=hint>💡 aiuto</button>` : '<span></span>'}
       <span class=hinttext id=hinttext></span>
+      <button class=hint id=skip>⏭️</button>
     </div></div>
     ${uniCorner()}`;
   document.querySelector('#back').onclick = quitRound;
   if (q.speakBtn) { let n = 0; const f = k => say(q.sayTxt, n++ ? .6 : .9, k); document.querySelector('#sp').onclick = () => f(1); setTimeout(f, 350); }
   if (q.hint) document.querySelector('#hint').onclick = () => { document.querySelector('#hinttext').textContent = q.hint; R.combo = 0; };
+  document.querySelector('#skip').onclick = () => { if (!q.answered) { reveal(q); settle(q, 0); } };
   document.querySelectorAll('.say').forEach(el => el.onclick = () => say(el.textContent));
   if (!q.mode)
     document.querySelectorAll('.picks .tile').forEach(el => el.onclick = () => answerPick(q, +el.dataset.i, el));
@@ -409,11 +411,17 @@ function settle(q, ok, el) {
   setTimeout(() => { R.pos++; renderQ(); }, ok ? 800 : 1600);
 }
 
+// show the answer without scoring it: the correct tile for a pick, the answer text
+// for an assemble. Used by a wrong answer and by the skip button.
+function reveal(q) {
+  if (q.mode) document.querySelector('#hinttext').textContent = q.answer;
+  else document.querySelectorAll('.picks .tile').forEach((e, j) => { if (q.choices[j].ok) e.classList.add('right'); });
+}
 function answerPick(q, i, el) {
   if (q.answered) return;
   const ok = !!q.choices[i].ok;
   el.classList.add(ok ? 'right' : 'wrong');
-  if (!ok) document.querySelectorAll('.picks .tile').forEach((e, j) => { if (q.choices[j].ok) e.classList.add('right'); });
+  if (!ok) reveal(q);
   settle(q, ok, el);
 }
 
@@ -435,7 +443,7 @@ function tapTray(q, i, el) {
     const got = q.placed.map(ti => q.tiles[ti]).join(q.joiner);
     const ok = got == q.answer;
     document.querySelectorAll('.slot').forEach(e => e.classList.add(ok ? 'right' : 'wrong'));
-    if (!ok) document.querySelector('#hinttext').textContent = q.answer;
+    if (!ok) reveal(q);
     settle(q, ok, document.querySelector('#slots'));
   }
 }
