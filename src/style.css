@@ -35,7 +35,11 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 
 /* ---------- home ---------- */
 .top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-.brand { font-weight: 900; font-size: 24px; letter-spacing: .5px; }
+/* clamp, not a fixed size: at 34px/3px the wordmark plus the streak and the two
+   icon buttons overflowed the header row on every phone (+15px at 390, +85 at 320),
+   which is a horizontal scrollbar. This keeps the full 34px on desktop and shrinks
+   to fit narrow screens; measured 0 overflow at 320, 360, 390 and 1200. */
+.brand { font-weight: 900; font-size: clamp(22px, 7vw, 34px); letter-spacing: 1px; }
 /* both wordmarks are painted with the seven arc colours, so both are INVISIBLE
    without a background-image: game.js sets the gradient on each. */
 .brand, .title { -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -48,7 +52,9 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 .arc { position: absolute; left: 50%; transform: translateX(-50%);
   border-radius: 50%; border: 14px solid #e7e9f4; background: none;
   transition: .6s; }
-.arc.on { filter: drop-shadow(0 0 5px var(--c)); border-color: var(--c); }
+/* No drop-shadow: the glow blurred outward from every arc into a muddy halo behind
+   the rainbow, the unicorn and the wordmark. border-color alone marks an arc done. */
+.arc.on { border-color: var(--c); }
 .ground { position: absolute; bottom: 0; left: -14px; right: -14px; height: 34px;
   background: linear-gradient(#8ed97f, #6cc25e); border-radius: 22px 22px 0 0; }
 .uni { position: absolute; bottom: 12px; left: 16px; font-size: 58px; line-height: 1;
@@ -83,6 +89,8 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 .dz { --c: #7a80a0; }
 .game.done { background: var(--c); }
 .game.done .nm, .game.done .cn { color: #fff; }
+
+.vw { text-align: center; margin-top: 7px; }
 
 /* ---------- round ---------- */
 .mid-wrap { margin: auto 0; padding: 8px 0 70px; }

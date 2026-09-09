@@ -21,8 +21,8 @@ playing rather than translating. Every answer is a tap: no typing, no timers.
 - 353 nouns with the right article and plural
 - 24 adjectives and 13 colours that agree in gender and number
 - 108 verbs, 19 irregular: presente, passato prossimo, imperfetto, futuro
-- Numbers from zero to 9,999,999,999, written and spoken
-- Sentences built fresh each time, never from a list
+- Numbers to 9,999,999,999, written and spoken
+- Sentences built fresh, never from a list
 - Six levels per skill, rising and falling with how you play
 
 **The seven arcs**
@@ -36,10 +36,10 @@ playing rather than translating. Every answer is a tap: no typing, no timers.
 - **Ripasso** spaced repetition of everything you got wrong
 
 An eighth card is your **Dizionario**: every word you have met. Tap one to
-hear it with its article.
+hear it spoken.
 
 Your coach is a unicorn called Baleno. She asks once whether to call you
-*Bravo* or *Brava*, teaching Italian adjective agreement in ten seconds.
+*Bravo* or *Brava*, teaching adjective agreement in ten seconds.
 
 Offline, no account, nothing to install. Progress lives in your browser.
 

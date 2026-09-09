@@ -35,17 +35,21 @@ const sfxRainbow = () => [523, 587, 659, 784, 880, 1046, 1174, 1568].forEach((f,
 // ---------- speech ----------
 let VOICE = null;
 function initVoice() {
+  // Best available Italian voice, or null for the browser default. Speech is
+  // attempted either way; this only decides how good it sounds. Chrome often
+  // returns [] on the first call and fires voiceschanged later, so repaint home
+  // when one finally turns up or the no-voice notice would never clear.
   const f = () => {
     const had = !!VOICE;
     VOICE = (speechSynthesis.getVoices() || []).find(v => /^it/i.test(v.lang)) || null;
-    if (!had && VOICE && document.querySelector('.games')) showHome();   // voices arrived late: refresh Ascolto card
+    if (!had && VOICE && document.querySelector('.games')) showHome();
   };
   try { f(); speechSynthesis.onvoiceschanged = f; } catch (e) { }
 }
 // force: an explicit tap on a speaker button speaks even when sound is muted, so a
 // muted player can still play Ascolto. Auto-play on show keeps respecting the mute.
 function say(t, rate, force) {
-  if (!VOICE || !(S.snd || force) || !t) return;
+  if (!(S.snd || force) || !t) return;
   try {
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(t.replace(/_/g, ''));
@@ -81,6 +85,9 @@ function rec(item, ok) {
 }
 
 // ---------- question generators ----------
+// SAY IT ONCE: okSay is spoken when the player answers correctly, and nothing speaks
+// on show. Ascolto inverts this -- it speaks on show (speakBtn/sayTxt) and sets no
+// okSay -- because hearing the word first IS the question there.
 let R = null;                                       // current round
 function pickFresh(pool) {
   const p = pool.filter(w => !R || !R.used.has(w.it));
@@ -98,7 +105,7 @@ function genParole(lvl, target) {
     return {
       mode: 0, word: w.it, sub: 'tocca il disegno giusto', item,
       choices: shuffle([{ t: w.e, e: 1, ok: 1 }, ...wrong.map(x => ({ t: x.e, e: 1 }))]),
-      okSay: w.it, sayOnShow: w.it
+      okSay: w.it
     };
   }
   const wrong = wrongWords(w, 3, hard);             // emoji/gloss -> word
@@ -192,7 +199,7 @@ function genNumeri(lvl, forceN) {
   return {                                          // word -> numeral
     mode: 0, mid: num(n), sub: 'tocca la cifra giusta', item: 'n' + nBand(n),
     choices: shuffle([{ t: fmtN(n), ok: 1 }, ...wrong.map(x => ({ t: fmtN(x) }))]),
-    okSay: num(n), sayOnShow: num(n)
+    okSay: num(n)
   };
 }
 
@@ -242,12 +249,11 @@ function genFrasi(lvl) {
 }
 
 function genAscolto(lvl) {
-  if (!VOICE) return genRipasso(lvl);
   if (lvl >= 3 && Math.random() < .3) {             // hear a whole sentence -> assemble it, no picture
     const s = genSentence(Math.min(3, lvl));         // same generator as Frasi, so plurals etc. apply here too
     return {
       mode: 1, speakBtn: 1, sayTxt: s.say, sub: 'componi la frase', item: null,
-      tiles: shuffle(s.tiles), slots: s.tiles.length, answer: s.tiles.join(' '), joiner: ' ', okSay: s.say
+      tiles: shuffle(s.tiles), slots: s.tiles.length, answer: s.tiles.join(' '), joiner: ' '
     };
   }
   if (Math.random() < .55) {                        // hear word -> pick emoji
@@ -257,7 +263,7 @@ function genAscolto(lvl) {
     return {
       mode: 0, speakBtn: 1, sayTxt: w.it, sub: 'ascolta e tocca il disegno', item: 'w' + w.it,
       choices: shuffle([{ t: w.e, e: 1, ok: 1 }, ...wrong.map(x => ({ t: x.e, e: 1 }))]),
-      okSay: w.it, hint: w.it
+      hint: w.it
     };
   }
   const [lo, hi] = N_RANGE[Math.min(lvl + 1, 4) - 1];     // hear number -> pick numeral
@@ -266,7 +272,7 @@ function genAscolto(lvl) {
   return {
     mode: 0, speakBtn: 1, sayTxt: num(n), sub: 'ascolta e tocca la cifra', item: 'n' + nBand(n),
     choices: shuffle([{ t: fmtN(n), ok: 1 }, ...wrong.map(x => ({ t: fmtN(x) }))]),
-    okSay: num(n), hint: num(n)
+    hint: num(n)
   };
 }
 
@@ -291,8 +297,7 @@ function genRipasso(lvl) {
 
 // ---------- round runner ----------
 function startRound(gi) {
-  const eff = gi == 5 && !VOICE ? 6 : gi;           // no Italian voice -> Ascolto becomes Ripasso
-  R = { gi, eff, pos: 0, count: 0, results: [], combo: 0, comboMax: 0, used: new Set(), queue: [] };
+  R = { gi, pos: 0, count: 0, results: [], combo: 0, comboMax: 0, used: new Set(), queue: [] };
   const lvl = S.lvl[gi];
   if (gi == 0) {                                    // teach up to 2 new words first
     const fresh = W.filter(w => w.lvl <= lvl && w.e && w.cat != 'agg' && !S.it['w' + w.it]);
@@ -303,7 +308,7 @@ function startRound(gi) {
     });
   }
   while (R.queue.filter(q => q.count).length < 10)
-    R.queue.push({ ...GAMES[eff].gen(lvl), count: 1 });
+    R.queue.push({ ...GAMES[gi].gen(lvl), count: 1 });
   renderQ();
 }
 
@@ -363,7 +368,6 @@ function renderQ() {
     </div></div>
     ${uniCorner()}`;
   document.querySelector('#back').onclick = quitRound;
-  if (q.sayOnShow) say(q.sayOnShow);
   if (q.speakBtn) { let n = 0; const f = k => say(q.sayTxt, n++ ? .6 : .9, k); document.querySelector('#sp').onclick = () => f(1); setTimeout(f, 350); }
   if (q.hint) document.querySelector('#hint').onclick = () => { document.querySelector('#hinttext').textContent = q.hint; R.combo = 0; };
   document.querySelectorAll('.say').forEach(el => el.onclick = () => say(el.textContent));
@@ -452,11 +456,11 @@ function endRound() {
   save();
   sfxArc();
   window.__test = { done: 1, S };
-  const g = GAMES[R.eff];
+  const g = GAMES[gi];
   document.querySelector('#app').innerHTML = `
     <div class="card results fade">
       <div class=hero>${g.ic}</div>
-      <h2 style="margin:4px 0">${gi == 5 && R.eff == 6 ? 'Ripasso II' : g.name} ✓</h2>
+      <h2 style="margin:4px 0">${g.name} ✓</h2>
       <div class=stat><span>✅ risposte giuste</span><b>${ok}/10</b></div>
       <div class=stat><span>🔥 combo migliore</span><b>${R.comboMax}</b></div>
       <div class=stat><span>📈 livello</span><b>${S.lvl[gi]}${dl > 0 ? ' ⬆️' : dl < 0 ? ' ⬇️' : ''}</b></div>
@@ -485,10 +489,9 @@ function showHome(celebrate) {
     return `<div class="arc ${S.arcs[i] ? 'on' : ''}" style="--c:${g.c};width:${D}px;height:${D}px;top:${128 - D / 2}px"></div>`;
   }).join('');
   const btns = GAMES.map((g, i) => {
-    const noVoice = i == 5 && !VOICE;
     return `<button class="game ${S.arcs[i] ? 'done' : ''}" style="--c:${g.c}" data-i=${i}>
       <span class=lv>${S.lvl[i]}</span>
-      <span class=ic>${noVoice ? '🔁' : g.ic}</span><span class=nm>${noVoice ? 'Ripasso II' : g.name}</span>
+      <span class=ic>${g.ic}</span><span class=nm>${g.name}</span>
       <span class=cn>${g.cn}</span></button>`;
   }).join('') + `
     <button class="game dz" id=dz>
@@ -514,7 +517,8 @@ function showHome(celebrate) {
       <div class="uni ${celebrate ? 'gallop' : ''}" id=uni>🦄</div>
     </div>
     <div class="bubble home" id=bub>${msg}</div>
-    <div class=games>${btns}</div>`;
+    <div class=games>${btns}</div>
+    ${VOICE ? '' : '<div class="muted vw">⚠️ voce italiana non trovata</div>'}`;
   if (celebrate) { sfxRainbow(); say('Fantastico! Ci vediamo domani!'); }
   document.querySelector('#snd').onclick = () => { S.snd = S.snd ? 0 : 1; save(); showHome(); };
   document.querySelector('#reset').onclick = () => { if (confirm('Cancellare tutto? 🗑️')) { S = freshSave(); save(); showIntro(); } };

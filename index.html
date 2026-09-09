@@ -13,9 +13,12 @@
 
 <!-- Open this file directly to play from source: no build, no server needed.
      The three scripts load in the same order as the packed release bundle.
-     src/data.js is GENERATED from content/*.tsv by the build. -->
+     src/data.js is GENERATED from content/*.tsv: rebuild after editing content. -->
 <script src=src/data.js></script>
 <script src=src/engine.js></script>
 <script src=src/game.js></script>
+<!-- DEV ONLY: never bundled. tools/build.js reads data/engine/game, so this file
+     costs nothing in the release. Type dbg.help() in the console. -->
+<script src=src/debug.js></script>
 </body>
 </html>
