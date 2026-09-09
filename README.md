@@ -1,24 +1,21 @@
 # 🌈 Arcobaleno - Learn Italian
 
-A daily Italian practice game that fits in 13 kilobytes. Seven small games,
-one per colour of the rainbow: answer ten questions and that colour lights
-up. Fill all seven in a day and your unicorn coach gallops over the finished
-rainbow, and your streak goes up. Tomorrow it starts faded again.
+A daily Italian practice game in 13 kilobytes. Seven small games, one per
+colour of the rainbow: answer ten questions and that colour lights up. Fill
+all seven and your unicorn coach gallops over the finished rainbow. Tomorrow
+it starts faded again, and your streak keeps counting.
 
-**There is no English anywhere.** Emoji carry the meaning, so you pick words
-up by playing rather than by translating. Every answer is a tap: no typing,
-no timers, no clock.
+**There is no English anywhere.** Emoji carry the meaning, so you learn by
+playing rather than translating. Every answer is a tap: no typing, no timers.
 
 **What's inside**
 
-- 353 nouns, each with its correct article and plural
-- 24 adjectives and 13 colours, agreeing in gender and number
-- 108 verbs, 19 of them irregular, in presente, passato prossimo, imperfetto
-  and futuro
+- 353 nouns with the right article and plural
+- 24 adjectives and 13 colours that agree in gender and number
+- 108 verbs, 19 irregular: presente, passato prossimo, imperfetto, futuro
 - Numbers from zero to 9,999,999,999, written and spoken
 - Sentences built fresh each time, never from a list
 - Six levels per skill, rising and falling with how you play
-- Your device speaks all of it aloud
 
 **The seven arcs**
 
@@ -30,12 +27,15 @@ no timers, no clock.
 - **Ascolto** hear a word, a number, or a whole sentence
 - **Ripasso** spaced repetition of everything you got wrong
 
-An eighth card holds your **Dizionario**: every word you have met, with its
-picture. Tap one to hear it spoken with its article.
+An eighth card is your **Dizionario**: every word you have met. Tap one to
+hear it spoken with its article.
 
 Your coach is a unicorn called Baleno. She asks once whether to call you
-*Bravo* or *Brava*, which teaches Italian adjective agreement in about ten
-seconds.
+*Bravo* or *Brava*, teaching Italian adjective agreement in ten seconds.
+
+**Chrome is recommended**: it ships its own Italian voice. Other browsers use
+the voices on your device, so Italian may come out with an accent. To fix
+that on Windows: Settings > Time & Language > Speech > Add voices > Italian.
 
 Offline, no account, nothing to install. Progress lives in your browser.
 
