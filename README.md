@@ -1,5 +1,7 @@
 # 🌈 Arcobaleno - Learn Italian
 
+# [Play Arcobaleno 🦄](https://killedbyapixel.github.io/Arcobaleno/)
+
 A daily Italian practice game in 13 kilobytes. Seven small games, one per
 colour of the rainbow: answer ten questions and that colour lights up. Fill
 all seven and your unicorn coach gallops over the finished rainbow. Tomorrow
