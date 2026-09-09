@@ -111,6 +111,9 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
 .speak.big { font-size: 42px; padding: 12px 26px; }
 
 .picks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+/* An Italian number is a single unbreakable word -- 57 letters at level 6 -- so it
+   must be allowed to break mid-word or it runs off the tile. */
+.tile, .prompt { overflow-wrap: anywhere; }
 .tile { border-radius: 16px; padding: 15px 8px; text-align: center;
   font-size: 21px; font-weight: 700; box-shadow: 0 4px 0 rgba(60,70,120,.1);
   border: 3px solid transparent; min-height: 62px; }

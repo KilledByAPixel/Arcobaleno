@@ -1,6 +1,8 @@
 # 🌈 Arcobaleno - Learn Italian
 
-# [Play Arcobaleno 🦄](https://killedbyapixel.github.io/Arcobaleno/)
+# [PLAY ARCOBALENO 🦄](https://killedbyapixel.github.io/Arcobaleno/)
+
+# [OFFICIAL JS13K PAGE](https://js13kgames.com/2026/games/arcobaleno-learn-italian)
 
 A daily Italian practice game in 13 kilobytes. Seven small games, one per
 colour of the rainbow: answer ten questions and that colour lights up. Fill
@@ -16,12 +18,14 @@ iOS), Text-to-speech output (Android).
 **There is no English anywhere.** Emoji carry the meaning, so you learn by
 playing rather than translating. Every answer is a tap: no typing, no timers.
 
+![Arcobaleno Cover](cover.png)
+
 **What's inside**
 
 - 353 nouns with the right article and plural
 - 24 adjectives and 13 colours that agree in gender and number
 - 108 verbs, 19 irregular: presente, passato prossimo, imperfetto, futuro
-- Numbers to 9,999,999,999, written and spoken
+- Numbers into the millions, written and spoken
 - Sentences built fresh, never from a list
 - Six levels per skill, rising and falling with how you play
 

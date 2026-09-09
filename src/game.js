@@ -182,14 +182,27 @@ function genNumeri(lvl, forceN) {
     }
   }
   let wrong;
-  if (forceN == null && lvl >= 5 && Math.random() < .35) {   // milioni e miliardi, pick only, top levels only:
-    const big = () => {                             // level 5 round (due milioni), level 6 mostly mixed
-      const u = rnd([1e6, 1e9]);                    // (due milioni trecentomila, tre miliardi cinquecento milioni)
-      return (1 + Math.random() * 9 | 0) * u + (lvl > 5 && Math.random() < .7 ? (1 + Math.random() * 999 | 0) * u / 1e3 : 0);
-    };
+  if (forceN == null && lvl >= 5 && Math.random() < .35) {   // milioni, pick mode, top levels only.
+    // Deliberately simple: a round million at 5 (due milioni), plus at most a round
+    // hundred-thousand at 6 (tre milioni cinquecentomila). Arbitrary remainders spell
+    // out into an unreadable wall of letters, and no miliardi -- num() still spells
+    // them, the game just never asks.
+    const big = () => (1 + Math.random() * 9 | 0) * 1e6 + (lvl > 5 ? (Math.random() * 10 | 0) * 1e5 : 0);
     n = big(); wrong = [];
     while (wrong.length < 3) { const t = big(); if (t != n && !wrong.includes(t)) wrong.push(t); }
-  } else wrong = wrongNums(n, lo, hi);
+  } else {
+    // Pick mode rounds to TWO SIGNIFICANT FIGURES, which caps every prompt at two
+    // non-zero digits however big it is: 456789 -> 450000, quattrocentocinquantamila.
+    // That solves both halves of the problem at once. A long number spells out to ~50
+    // letters with nowhere to break, and distractors one apart differ in three of
+    // them, so four of those was a spot-the-difference puzzle rather than a reading
+    // test. Stepping the distractors by the same magnitude keeps them 2 s.f. too.
+    // Assemble mode still draws the full unrounded range: a complex number belongs
+    // there, where it is built from parts rather than read off a tile.
+    const step = 10 ** Math.max(0, ('' + n).length - 2);
+    n = sig2(n);
+    wrong = wrongNums(n, lo, hi, step);
+  }
   if (Math.random() < .5)
     return {                                        // numeral -> word
       mode: 0, word: fmtN(n), sub: 'tocca il numero giusto', item: 'n' + nBand(n),

@@ -255,9 +255,14 @@ function wrongWords(right, n, hard) {
   }
   return out;
 }
-function wrongNums(n, lo, hi) {
+// Round to TWO SIGNIFICANT FIGURES: 456789 -> 450000. Caps any number at two non-zero
+// digits, which is what keeps a spelled-out Italian number short enough to read.
+const sig2 = n => n - n % 10 ** Math.max(0, ('' + n).length - 2);
+// step: how far apart the near-miss distractors sit, so they do not spell almost
+// identically. The caller passes the prompt's own magnitude.
+function wrongNums(n, lo, hi, step = 1) {
   const s = new Set([n]);
-  const tries = [n + 1, n - 1, n + 10, n - 10, n * 10, Math.floor(n / 10),
+  const tries = [n + step, n - step, n + 10 * step, n - 10 * step, n * 10, Math.floor(n / 10),
     +String(n).split('').reverse().join('')];
   const out = [];
   for (const t of tries) {
@@ -266,7 +271,10 @@ function wrongNums(n, lo, hi) {
   }
   let guard = 99;
   while (out.length < 3 && guard--) {
-    const t = lo + (Math.random() * (hi - lo + 1) | 0);
+    // sig2 the filler too, or it undoes the caller's rounding and drops a 456789 next
+    // to three tidy choices. Its own magnitude, not `step`: when the prompt is 0 the
+    // step is 1 and would round nothing at all.
+    const t = sig2(lo + (Math.random() * (hi - lo + 1) | 0));
     if (!s.has(t)) { s.add(t); out.push(t); }
   }
   return out;
