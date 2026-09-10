@@ -69,7 +69,7 @@ const GAMES = [
   { name: 'Parole', cn: 'rosso', c: '#e84855', ic: '💬', gen: genParole },
   { name: 'Articoli', cn: 'arancione', c: '#f9844a', ic: '🏷️', gen: genArticoli },
   { name: 'Numeri', cn: 'giallo', c: '#eec500', ic: '🔢', gen: genNumeri },
-  { name: 'Verbi', cn: 'verde', c: '#2bb673', ic: '✍️', gen: genVerbi },
+  { name: 'Verbi', cn: 'verde', c: '#2bb673', ic: '🏃', gen: genVerbi },
   { name: 'Frasi', cn: 'azzurro', c: '#38b6ff', ic: '🧩', gen: genFrasi },
   { name: 'Ascolto', cn: 'indaco', c: '#5560d9', ic: '🔊', gen: genAscolto },
   { name: 'Ripasso', cn: 'violetto', c: '#9b5de5', ic: '🔁', gen: genRipasso },
