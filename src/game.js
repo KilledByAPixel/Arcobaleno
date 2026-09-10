@@ -62,7 +62,7 @@ function say(t, rate, force) {
 // ---------- unicorn phrases ----------
 const bravo = () => S.pg == 'f' ? 'Brava!' : 'Bravo!';
 const PRAISE = () => [bravo(), 'Perfetto!', 'Benissimo!', 'Che bello!', 'Ottimo!', 'Sì!'];
-const OOPS = ['Quasi!', 'Riprova!', 'Quasi quasi...', 'La prossima volta!'];
+const OOPS = ['Quasi!', 'Riprova!', 'La prossima volta!'];
 
 // ---------- games ----------
 const GAMES = [
@@ -492,7 +492,7 @@ function endRound() {
       <div class=stat><span>📈 livello</span><b>${S.lvl[gi]}${dl > 0 ? ' ⬆️' : dl < 0 ? ' ⬇️' : ''}</b></div>
     </div>
     <div style="margin-top:14px"><button class=btn id=go>${full && firstFull ? '🌈 Arcobaleno!' : 'Continua ➜'}</button></div>
-    ${uniCorner(dl > 0 ? 'Livello su! ' + bravo() : rnd(PRAISE()))}`;
+    ${uniCorner(dl > 0 ? 'Livello superato! ' + bravo() : rnd(PRAISE()))}`;
   say(dl > 0 ? bravo() : 'Molto bene!');
   document.querySelector('#go').onclick = () => { R = null; showHome(full && firstFull); };
 }
