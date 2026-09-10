@@ -9,9 +9,10 @@ const today = () => Math.floor((Date.now() - new Date().getTimezoneOffset() * 6e
 // ---------- save ----------
 let S = null;
 function save() { try { localStorage.setItem('arco', JSON.stringify(S)); } catch (e) { } }
-function load() { try { return JSON.parse(localStorage.getItem('arco')); } catch (e) { return null; } }
+// merged over the defaults, so a field added later (rb, lp) exists in an old save
+function load() { try { return { ...freshSave(), ...JSON.parse(localStorage.getItem('arco')) }; } catch (e) { return null; } }
 function freshSave() {
-  return { v: 1, pg: '', uni: 'Baleno', snd: 1, day: today(), arcs: [0, 0, 0, 0, 0, 0, 0], streak: 0, lastFull: -9, lvl: [1, 1, 1, 1, 1, 1, 1], it: {} };
+  return { v: 1, pg: '', uni: 'Baleno', snd: 1, day: today(), arcs: [0, 0, 0, 0, 0, 0, 0], streak: 0, rb: 0, lastFull: -9, lp: -9, lvl: [1, 1, 1, 1, 1, 1, 1], it: {} };
 }
 
 // ---------- audio ----------
@@ -313,7 +314,12 @@ function genRipasso(lvl) {
 }
 
 // ---------- round runner ----------
+// tints the page with the current game's colour; bg() restores the home sky
+// the ,#fff layer matters: js13k embeds the game in an iframe, whose canvas is
+// transparent, so an alpha tint alone let the host page show through
+function bg(c) { document.body.style.background = c ? `linear-gradient(${c}40,${c}10) fixed,#fff` : ''; }
 function startRound(gi) {
+  bg(GAMES[gi].c);
   R = { gi, pos: 0, count: 0, results: [], combo: 0, comboMax: 0, used: new Set(), queue: [] };
   const lvl = S.lvl[gi];
   if (gi == 0) {                                    // teach up to 2 new words first
@@ -386,7 +392,12 @@ function renderQ() {
     </div></div>
     ${uniCorner()}`;
   document.querySelector('#back').onclick = quitRound;
-  if (q.speakBtn) { let n = 0; const f = k => say(q.sayTxt, n++ ? .6 : .9, k); document.querySelector('#sp').onclick = () => f(1); setTimeout(f, 350); }
+  // first play at .9, every replay slow at .6; the button turns into 🐢 so the player knows
+  if (q.speakBtn) {
+    let n = 0; const b = document.querySelector('#sp');
+    const f = k => { if (S.snd || k) { say(q.sayTxt, n++ ? .6 : .9, k); b.textContent = '🐢'; } };
+    b.onclick = () => f(1); setTimeout(f, 350);
+  }
   if (q.hint) document.querySelector('#hint').onclick = () => { document.querySelector('#hinttext').textContent = q.hint; R.combo = 0; };
   document.querySelector('#skip').onclick = () => { if (!q.answered) { reveal(q); settle(q, 0); } };
   document.querySelectorAll('.say').forEach(el => el.onclick = () => say(el.textContent));
@@ -395,28 +406,17 @@ function renderQ() {
   else { drawSlots(q); document.querySelectorAll('.tray .tile').forEach(el => el.onclick = () => tapTray(q, +el.dataset.i, el)); }
 }
 
-function sparkle(x, y) {
-  for (let i = 0; i < 6; i++) {
-    const s = document.createElement('div');
-    s.className = 'spark'; s.textContent = rnd(['✨', '⭐', '🌟']);
-    s.style.left = x + 'px'; s.style.top = y + 'px';
-    s.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
-    s.style.setProperty('--dy', (-40 - Math.random() * 80) + 'px');
-    document.body.appendChild(s); setTimeout(() => s.remove(), 900);
-  }
-}
 function uniSay(msg, happy) {
   const b = document.querySelector('#rbub'), u = document.querySelector('#runi');
   if (u && happy) { u.classList.add('happy'); setTimeout(() => u.classList.remove('happy'), 400); }
   if (b) { b.textContent = msg; b.hidden = false; }
 }
 
-function settle(q, ok, el) {
+function settle(q, ok) {
   q.answered = 1;
   if (ok) {
     R.combo++; R.comboMax = Math.max(R.comboMax, R.combo);
     sfxOk(R.combo); uniSay(rnd(PRAISE()), 1);
-    if (el) { const r = el.getBoundingClientRect(); sparkle(r.left + r.width / 2, r.top); }
     say(q.okSay);
     rec(q.item, !q.wasWrong);
   } else {
@@ -439,7 +439,7 @@ function answerPick(q, i, el) {
   const ok = !!q.choices[i].ok;
   el.classList.add(ok ? 'right' : 'wrong');
   if (!ok) reveal(q);
-  settle(q, ok, el);
+  settle(q, ok);
 }
 
 function drawSlots(q) {
@@ -461,7 +461,7 @@ function tapTray(q, i, el) {
     const ok = got == q.answer;
     document.querySelectorAll('.slot').forEach(e => e.classList.add(ok ? 'right' : 'wrong'));
     if (!ok) reveal(q);
-    settle(q, ok, document.querySelector('#slots'));
+    settle(q, ok);
   }
 }
 
@@ -477,7 +477,8 @@ function endRound() {
   S.arcs[gi] = 1;
   const full = S.arcs.every(a => a);
   let firstFull = false;
-  if (full && S.lastFull != S.day) { S.streak++; S.lastFull = S.day; firstFull = true; }
+  if (S.lp != S.day) { S.streak++; S.lp = S.day; }             // 🔥 one round a day keeps it
+  if (full && S.lastFull != S.day) { S.rb++; S.lastFull = S.day; firstFull = true; }   // 🌈 lifetime rainbows
   save();
   sfxArc();
   window.__test = { done: 1, S };
@@ -502,11 +503,12 @@ const known = () => W.filter(w => w.e && (S.it['w' + w.it] || S.it['a' + w.it]))
 function rollover() {
   const d = today();
   if (S.day != d) {
-    if (S.lastFull < d - 1) S.streak = 0;
+    if (S.lp < d - 1) S.streak = 0;
     S.day = d; S.arcs = [0, 0, 0, 0, 0, 0, 0]; save();
   }
 }
 function showHome(celebrate) {
+  bg();
   rollover();
   const done = S.arcs.filter(a => a).length;
   const arcs = GAMES.map((g, i) => {
@@ -515,7 +517,7 @@ function showHome(celebrate) {
   }).join('');
   const btns = GAMES.map((g, i) => {
     return `<button class="game ${S.arcs[i] ? 'done' : ''}" style="--c:${g.c}" data-i=${i}>
-      <span class=lv>${S.lvl[i]}</span>
+      <span class=lv>${S.lvl[i] > 5 ? '👑' : S.lvl[i]}</span>
       <span class=ic>${g.ic}</span><span class=nm>${g.name}</span>
       <span class=cn>${g.cn}</span></button>`;
   }).join('') + `
@@ -531,9 +533,8 @@ function showHome(celebrate) {
     <div class=top>
       <div class=brand style="background-image:linear-gradient(90deg,${GAMES.map(g => g.c)})">Arcobaleno</div>
       <div style="display:flex;gap:8px;align-items:center">
-        <div class=streak>🌈 ${S.streak}</div>
+        <div class=streak>${S.lvl.every(l => l > 5) ? '👑 ' : ''}🔥${S.streak} 🌈${S.rb}</div>
         <button class=iconbtn id=snd>${S.snd ? '🔊' : '🔇'}</button>
-        <button class=iconbtn id=reset>🔄</button>
       </div>
     </div>
     <div class=scene>
@@ -546,7 +547,6 @@ function showHome(celebrate) {
     ${VOICE ? '' : '<div class="muted vw">⚠️ voce italiana non trovata</div>'}`;
   if (celebrate) { sfxRainbow(); say('Fantastico! Ci vediamo domani!'); }
   document.querySelector('#snd').onclick = () => { S.snd = S.snd ? 0 : 1; save(); showHome(); };
-  document.querySelector('#reset').onclick = () => { if (confirm('Cancellare tutto? 🗑️')) { S = freshSave(); save(); showIntro(); } };
   document.querySelector('#uni').onclick = () => say('Ciao! Sono ' + S.uni + '!');
   document.querySelectorAll('.game[data-i]').forEach(el => el.onclick = () => startRound(+el.dataset.i));
   document.querySelector('#dz').onclick = showDict;
@@ -555,15 +555,20 @@ function showHome(celebrate) {
 
 // ---------- dictionary ----------
 function showDict() {
-  const ws = known();
+  const ws = known().sort((a, b) => a.it.localeCompare(b.it));   // alphabetical, accents in place
   document.querySelector('#app').innerHTML = `
     <div class=rtop><button class=iconbtn id=back>✕</button></div>
     <div class="card fade">${ws.length ? `<div class=tray>${ws.map(w =>
       `<button class="tile dw" data-s="${joinArt(art(w.it, w.g, w.plOnly), w.it)}">${w.e}<div class=muted>${w.it}</div></button>`).join('')}</div>`
-      : '<div class=muted>Gioca per imparare! 🌈</div>'}</div>`;
+      : '<div class=muted>Gioca per imparare! 🌈</div>'}</div>
+    <div style="margin-top:14px;text-align:center"><button class=hint id=reset>🔄 ricomincia</button></div>`;
   document.querySelector('#back').onclick = () => showHome();
-  // a tap on a word is an explicit request, so it speaks even when sound is muted
-  document.querySelectorAll('.dw').forEach(el => el.onclick = () => say(el.dataset.s, .8, 1));
+  // the wipe lives at the BOTTOM of the dictionary, not on home: it is mostly a dev/test
+  // tool, and a daily screen should not carry a self-destruct button (README says where)
+  document.querySelector('#reset').onclick = () => { if (confirm('Cancellare tutto? 🗑️')) { S = freshSave(); save(); showIntro(); } };
+  // a tap on a word is an explicit request, so it speaks even when sound is muted, and the
+  // caption becomes the article phrase so gender reaches the eye as well as the ear
+  document.querySelectorAll('.dw').forEach(el => el.onclick = () => { say(el.dataset.s, .8, 1); el.lastChild.textContent = el.dataset.s; });
 }
 
 // ---------- intro ----------
@@ -571,6 +576,7 @@ function showIntro(step) {
   if (!step) {
     document.querySelector('#app').innerHTML = `
       <div class="intro fade">
+        <div class=title style="background-image:linear-gradient(90deg,${GAMES.map(g => g.c)})">ARCOBALENO</div>
         <div class=hero>🦄</div>
         <div class="bubble" style="position:static;display:inline-block;margin:10px 0">
           Ciao! Sono ${S.uni}! E tu? Quando vinci ti dico...
@@ -591,7 +597,6 @@ function showIntro(step) {
     <div class="intro fade">
       <div class=hero>🦄</div>
       <div class=title style="background-image:linear-gradient(90deg,${GAMES.map(g => g.c)})">ARCOBALENO</div>
-      <p class=muted>impara l'italiano, un giorno alla volta</p>
       <div class="bubble" style="position:static;display:inline-block;margin:10px 0">
         Ogni giorno facciamo un arcobaleno: sette colori, sette giochi!
       </div>
