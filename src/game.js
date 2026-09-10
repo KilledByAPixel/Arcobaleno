@@ -392,11 +392,11 @@ function renderQ() {
     </div></div>
     ${uniCorner()}`;
   document.querySelector('#back').onclick = quitRound;
-  // first play at .9, every replay slow at .6; the button turns into 🐢 so the player knows
+  // first play at .9, every replay slow at .6, and the button stays 🔊 (a 🐢 label was
+  // tried and read as a different control). A muted auto-play does not count as a play.
   if (q.speakBtn) {
-    let n = 0; const b = document.querySelector('#sp');
-    const f = k => { if (S.snd || k) { say(q.sayTxt, n++ ? .6 : .9, k); b.textContent = '🐢'; } };
-    b.onclick = () => f(1); setTimeout(f, 350);
+    let n = 0; const f = k => { if (S.snd || k) say(q.sayTxt, n++ ? .6 : .9, k); };
+    document.querySelector('#sp').onclick = () => f(1); setTimeout(f, 350);
   }
   if (q.hint) document.querySelector('#hint').onclick = () => { document.querySelector('#hinttext').textContent = q.hint; R.combo = 0; };
   document.querySelector('#skip').onclick = () => { if (!q.answered) { reveal(q); settle(q, 0); } };

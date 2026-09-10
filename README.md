@@ -23,7 +23,7 @@ You can add the voice in Settings: Time & Language > Speech (Windows), Accessibi
 - **Numeri** into the millions: read them, hear them, build them from parts
 - **Verbi** 108 verbs, 19 irregular: presente, passato prossimo, imperfetto, futuro
 - **Frasi** build a sentence from tiles: 🐱🐱⚫🍕 is *i gatti neri mangiano la pizza*
-- **Ascolto** hear a word, a number or a whole sentence; tap 🐢 for slow
+- **Ascolto** hear a word, a number or a whole sentence; tap 🔊 again to hear it slowly
 - **Ripasso** spaced repetition of everything you got wrong
 - **Dizionario** every word you have learned with its article; tap one to hear it
 
