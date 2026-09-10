@@ -159,7 +159,8 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
   border-bottom: 2px solid #eef0f8; font-weight: 600; }
 .stat b { font-size: 18px; }
 
-.intro { padding-top: 30px; }
+/* auto margins in #app's flex column centre the intro vertically on any screen height */
+.intro { margin: auto 0; }
 .intro .hero { font-size: 96px; }
 .title { font-size: 34px; font-weight: 900; letter-spacing: 1px; }
 .names { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin: 14px 0; }
