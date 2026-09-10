@@ -559,16 +559,16 @@ function showDict() {
   document.querySelector('#app').innerHTML = `
     <div class=rtop><button class=iconbtn id=back>✕</button></div>
     <div class="card fade">${ws.length ? `<div class=tray>${ws.map(w =>
-      `<button class="tile dw" data-s="${joinArt(art(w.it, w.g, w.plOnly), w.it)}">${w.e}<div class=muted>${w.it}</div></button>`).join('')}</div>`
+      `<button class="tile dw">${w.e}<div class=muted>${joinArt(art(w.it, w.g, w.plOnly), w.it)}</div></button>`).join('')}</div>`
       : '<div class=muted>Gioca per imparare! 🌈</div>'}</div>
     <div style="margin-top:14px;text-align:center"><button class=hint id=reset>🔄 ricomincia</button></div>`;
   document.querySelector('#back').onclick = () => showHome();
   // the wipe lives at the BOTTOM of the dictionary, not on home: it is mostly a dev/test
   // tool, and a daily screen should not carry a self-destruct button (README says where)
   document.querySelector('#reset').onclick = () => { if (confirm('Cancellare tutto? 🗑️')) { S = freshSave(); save(); showIntro(); } };
-  // a tap on a word is an explicit request, so it speaks even when sound is muted, and the
-  // caption becomes the article phrase so gender reaches the eye as well as the ear
-  document.querySelectorAll('.dw').forEach(el => el.onclick = () => { say(el.dataset.s, .8, 1); el.lastChild.textContent = el.dataset.s; });
+  // the caption IS the article phrase ("il gatto"), so gender reaches the eye as well as the
+  // ear; a tap on a word is an explicit request, so it speaks even when sound is muted
+  document.querySelectorAll('.dw').forEach(el => el.onclick = () => say(el.lastChild.textContent, .8, 1));
 }
 
 // ---------- intro ----------

@@ -25,7 +25,7 @@ You can add the voice in Settings: Time & Language > Speech (Windows), Accessibi
 - **Frasi** build a sentence from tiles: 🐱🐱⚫🍕 is *i gatti neri mangiano la pizza*
 - **Ascolto** hear a word, a number or a whole sentence; tap 🐢 for slow
 - **Ripasso** spaced repetition of everything you got wrong
-- **Dizionario** every word you have learned; tap one to hear it with its article
+- **Dizionario** every word you have learned with its article; tap one to hear it
 
 Around 390 words with article and plural, adjectives that agree, sentences generated fresh rather than read from a list. Six levels per skill, rising and falling with how you play; a crown marks level six.
 
